@@ -14,6 +14,7 @@ class BottomIndicatorBar extends StatefulWidget {
   late IconData iconData;
   final ValueChanged<int> onTap;
   final List<BottomIndicatorNavigationBarItem> items;
+  final BorderRadius borderRadius;
 
   BottomIndicatorBar({
     Key? key,
@@ -23,6 +24,7 @@ class BottomIndicatorBar extends StatefulWidget {
     this.inactiveColor = Colors.grey,
     this.indicatorColor = Colors.grey,
     this.shadow = true,
+    required this.borderRadius,
     this.currentIndex = 0,
   }) : super(key: key);
 
@@ -63,6 +65,7 @@ class _BottomIndicatorBarState extends State<BottomIndicatorBar> {
       height: BAR_HEIGHT + MediaQuery.of(context).viewPadding.bottom,
       width: width,
       decoration: BoxDecoration(
+        borderRadius: widget.borderRadius,
         color: Theme.of(context).cardColor,
         boxShadow: widget.shadow
             ? [
@@ -71,7 +74,7 @@ class _BottomIndicatorBarState extends State<BottomIndicatorBar> {
             : null,
       ),
       child: Stack(
-        overflow: Overflow.visible,
+        clipBehavior: Clip.hardEdge,
         children: <Widget>[
           Positioned(
             top: INDICATOR_HEIGHT,
